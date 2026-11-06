@@ -384,6 +384,7 @@ mod tests {
         let _ = std::fs::remove_dir_all(base);
     }
 
+    /// A root and a path reached through links are compared after the links are followed.
     #[test]
     fn links_are_followed_before_comparing() {
         let (base, roots) = folders("links");
@@ -476,6 +477,7 @@ mod tests {
     }
 
     #[cfg(windows)]
+    /// On Windows a root matches in any case, and device names are refused.
     #[test]
     fn windows_ignores_case_and_refuses_devices() {
         let (base, roots) = folders("case");
@@ -491,6 +493,7 @@ mod tests {
         let _ = std::fs::remove_dir_all(base);
     }
 
+    /// Scopes nest, and a scope applies only on the thread that set it.
     #[test]
     fn scopes_nest_and_stay_on_their_thread() {
         let (base, roots) = folders("scopes");
@@ -512,6 +515,7 @@ mod tests {
         let _ = std::fs::remove_dir_all(base);
     }
 
+    /// What is a device name, with superscript digits and a name before a colon, and what isn't.
     #[test]
     fn device_names() {
         for d in ["CON", "nul", "Com1", "LPT9.txt", "aux.scraft", "NUL ", "COM¹", "Lpt²", "lpt³.txt", "COM1:", "nul:x", "COM¹:"] {
